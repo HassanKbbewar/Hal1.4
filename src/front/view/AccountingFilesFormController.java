@@ -643,52 +643,82 @@ public class AccountingFilesFormController implements Initializable {
     private void proccedToSelectedCycle() {
         AccountingFilesDetails currAccFileDetail = AccountingFilesDetailsTable.getSelectionModel().getSelectedItem();
         AccountingFiles currAccFile = AccountingFilesTable.getSelectionModel().getSelectedItem();
-        
-        if (currAccFileDetail== null){
+
+        if (currAccFileDetail == null) {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("لا يوجد دورة محاسبية محددة");
             alert.getDialogPane().nodeOrientationProperty().set(NodeOrientation.RIGHT_TO_LEFT);
             alert.setContentText("الرجاء تحديد دورة محاسبية ليتم الإنتقال إليها");
             alert.showAndWait();
-        } else if (currAccFile.getAccountingFilesPassword().equals("")){
-            showProceedConfirmationDialog (currAccFile, currAccFileDetail) ;
-            
-        }else if (!currAccFile.getAccountingFilesPassword().equals("")){
-            if (showAccountingBookPasswordConfirm(currAccFile) == true){
-                showProceedConfirmationDialog (currAccFile, currAccFileDetail) ;
+        } else if (currAccFile.getAccountingFilesActiveStatus() == false || currAccFileDetail.getActiveStatus() == false) {
+            if (currAccFile.getAccountingFilesPassword().equals("")) {
+                showProceedConfirmationDialog(currAccFile, currAccFileDetail);
+            } else if (!currAccFile.getAccountingFilesPassword().equals("")) {
+                if (showAccountingBookPasswordConfirm(currAccFile) == true) {
+                    showProceedConfirmationDialog(currAccFile, currAccFileDetail);
+                }
+
             }
+        }else if (currAccFile.getAccountingFilesActiveStatus() == true && currAccFileDetail.getActiveStatus() == true){
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("هذه الدورة محددة بالفعل مسبقا");
+            alert.getDialogPane().nodeOrientationProperty().set(NodeOrientation.RIGHT_TO_LEFT);
+            alert.setContentText("الرجاء تحديد دورة محاسبية غير محددة مسبقاً");
+            alert.showAndWait();
         }
-        
 
     }
-    
-    public void showProceedConfirmationDialog (AccountingFiles currAccFile, AccountingFilesDetails currAccFileDetail){
+
+    public void showProceedConfirmationDialog(AccountingFiles currAccFile, AccountingFilesDetails currAccFileDetail) {
+
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("تأكيد الإنتقال إلى الدورة المحاسبية المحددة");
         alert.setHeaderText("تأكيد");
         alert.getDialogPane().nodeOrientationProperty().set(NodeOrientation.RIGHT_TO_LEFT);
-
         alert.setContentText("هل أنت متأكد من الإنتقال إلى الدورة المحاسبية  " + currAccFileDetail.getFileName());
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
+
             mainEm.getTransaction().begin();
-            for (AccountingFiles af : accountingData){
+            for (AccountingFiles af : accountingData) {
                 af.setAccountingFilesActiveStatus(false);
             }
-            for(AccountingFilesDetails afDetail : accountingDetails){
+            for (AccountingFilesDetails afDetail : accountingDetails) {
                 afDetail.setActiveStatus(false);
             }
             currAccFile.setAccountingFilesActiveStatus(true);
             currAccFileDetail.setActiveStatus(true);
-            mainEm.getTransaction().commit();
+            Connector.closeDataConnection();
+            EntityManager dataManager = Connector.getDataEntityManager();
+            if (dataManager != null && dataManager.isOpen() == true) {
+                mainEm.getTransaction().commit();
+            } else {
+                System.out.println("if(dataManager != null && dataManager.isOpen() == false)if(dataManager != null && dataManager.isOpen() == false)");
+                mainEm.getTransaction().rollback();
+                Connector.getDataEntityManager();
+
+            }
+
             showAccountingFilesDetails(currAccFile);
             addingItems();
-            Connector.closeDataConnection();
-            Connector.getDataEntityManager();
+
             mainApp.accountingFilesStage.hide();
+
         } else {
             alert.hide();
+        }
+
+    }
+    @FXML
+    private void removePassword (){
+        if (! AccountingFilesTable.getSelectionModel().getSelectedItem().getAccountingFilesPassword().equals("")){
+            if (showAccountingBookPasswordConfirm(AccountingFilesTable.getSelectionModel().getSelectedItem()) == true ){
+                mainEm.getTransaction().begin();
+                AccountingFilesTable.getSelectionModel().getSelectedItem().setAccountingFilesPassword("");
+                mainEm.getTransaction().commit();
+                addingItems();
+            }
         }
     }
 
