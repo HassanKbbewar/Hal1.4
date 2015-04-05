@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="HalPU" transaction-type="RESOURCE_LOCAL">
+        <property name="eclipselink.logging.level" value="FINE"/>
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>back.entities.UserInformation</class>
+        <class>back.entities.AccountPosition</class>
+        <class>back.entities.Balance</class>
+        <class>back.entities.Users</class>
+        <class>back.entities.AccountingFilesDetails</class>
+        <class>back.entities.Forms</class>
+        <class>back.entities.MainSequence</class>
+        <class>back.entities.AccountingFiles</class>
+        <class>back.entities.UsersPermission</class>
+        <class>back.entities.DebitCollect</class>
+        <class>back.entities.Customers</class>
+        <class>back.entities.Sequence</class>
+        <class>back.entities.CommissionSales</class>
+        <class>back.entities.CashDaily</class>
+        <class>back.entities.Invoices</class>
+        <class>back.entities.BuyingGoods</class>
+        <class>back.entities.InvoiceDetails</class>
+        <class>back.entities.GoodsKind</class>
+        <class>back.entities.CargoDetails</class>
+        <class>back.entities.CashDailySub</class>
+        <class>back.entities.Daily</class>
+        <class>back.entities.Account</class>
+        <class>back.entities.BuyersCustomers</class>
+        <class>back.entities.DailyDetails</class>
+        <class>back.entities.Cargo</class>
+        <class>back.entities.CommissionSalesDetails</class>
+        <class>back.entities.MergedInvoices</class>
+        <class>back.entities.BuyingDetails</class>
+    </persistence-unit>
+</persistence>

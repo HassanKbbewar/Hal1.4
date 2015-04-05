@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="front.view.MainFormController">
+    <top>
+        <AnchorPane prefHeight="36.0" prefWidth="1400.0" BorderPane.alignment="CENTER">
+         <children>
+        <MenuBar prefHeight="200.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="ملف">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#showAccountingFilesForm" text="إدارة الملفات المحاسبية" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleExit" text="إنهاء العمل" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="أوامر">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="التقرير العام" />
+                        <Menu mnemonicParsing="false" text="صيانة النظام">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="صيانة الملف المحاسبي" />
+                                <MenuItem mnemonicParsing="false" text="تدقيق عام للنظام" />
+                                <SeparatorMenuItem mnemonicParsing="false" />
+                                <MenuItem mnemonicParsing="false" text="تحديد إفتتاحي الصندوق" />
+                                <SeparatorMenuItem mnemonicParsing="false" />
+                                <MenuItem mnemonicParsing="false" text="صيانة دفتر الأستاذ" />
+                                <SeparatorMenuItem mnemonicParsing="false" />
+                                <MenuItem mnemonicParsing="false" text="صيانة دفتر زبائن الدورة" />
+                                <MenuItem mnemonicParsing="false" text="نقل حركات في دفتر زبائن الدورة" />
+                                        
+                            </items>
+                           
+                        </Menu>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="استعادة نسخة إحتياطية" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="عرض الحسابات الختامية" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="الدفاتر المحاسبية">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="دفتر الصندوق" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="دفتر الأستاذ" />
+                        <MenuItem mnemonicParsing="false" text="دفتر اليومية" />
+                        <MenuItem mnemonicParsing="false" text="ميزان المراجعة" />
+                        <MenuItem mnemonicParsing="false" text="لوحة التحكم" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="كشف حساب" />
+                        <MenuItem mnemonicParsing="false" text="كشف حساب منفصل" />
+                        <MenuItem mnemonicParsing="false" text="كشف توريد تفصيلي" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="دفاتر البيع">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="دفتر القلاب" />
+                        <MenuItem mnemonicParsing="false" text="خلاصة الصناديق" />
+                        <MenuItem mnemonicParsing="false" text="تقرير المبيعات" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="دفتر الدورة" />
+                        <MenuItem mnemonicParsing="false" text="زبائن الدورة" />
+                        <MenuItem mnemonicParsing="false" text="كشوفات الدورة" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="دفتر الصوافي" />
+                        <MenuItem mnemonicParsing="false" text="طباعة الفواتير" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="خدمة المواد" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="دفاتر الشراء">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="دفتر الشراء" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="كشف المستودع" />
+                        <MenuItem mnemonicParsing="false" text="كشف توريد صنف" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="دفاتر الشحن">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="دفتر الشحن" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="معلومات المستخدم">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="مدير الأمن" />
+                        <MenuItem mnemonicParsing="false" text="بيانات المستخدم" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+            <Button mnemonicParsing="false" onAction="#handleExit" prefHeight="25.0" prefWidth="56.0" text="إغلاق" AnchorPane.rightAnchor="637.0" AnchorPane.topAnchor="10.0" />
+        </children>
+      </AnchorPane>
+    </top>
+</BorderPane>

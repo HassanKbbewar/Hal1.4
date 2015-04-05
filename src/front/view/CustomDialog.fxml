@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+
+<DialogPane contentText="الرجاء ادخال اسم الدورة الجديدة" nodeOrientation="RIGHT_TO_LEFT" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <buttonTypes>
+      <ButtonType fx:constant="YES" />
+      <ButtonType fx:constant="CLOSE" />
+   </buttonTypes>
+   <content>
+      <TextField prefHeight="9.0" prefWidth="200.0" />
+   </content>
+   <header>
+      <Label text="الرجاء ادخال اسم الدورة الجديدة" />
+   </header>
+</DialogPane>
