@@ -48,7 +48,7 @@
                         <MenuItem mnemonicParsing="false" text="دفتر الصندوق" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" text="دفتر الأستاذ" />
-                        <MenuItem mnemonicParsing="false" text="دفتر اليومية" />
+                        <MenuItem mnemonicParsing="false" onAction="#showDailyForm" text="دفتر اليومية" />
                         <MenuItem mnemonicParsing="false" text="ميزان المراجعة" />
                         <MenuItem mnemonicParsing="false" text="لوحة التحكم" />
                         <SeparatorMenuItem mnemonicParsing="false" />

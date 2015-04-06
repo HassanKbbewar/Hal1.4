@@ -3,14 +3,14 @@ package front.view;
 import back.utility.Connector;
 import java.io.File;
 import java.io.IOException;
-import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -26,10 +26,16 @@ public class MainApp extends Application {
 
     public Stage primaryStage;
     private BorderPane mainForm;
-    public Stage accountingFilesStage ;
+    public Stage accountingFilesStage;
 
     public MainApp() {
     }
+
+    @Override
+    public void init() throws Exception {
+        System.out.println("in init");
+    }
+    // CREATE ROOT
 
     @Override
     public void start(Stage primaryStage) {
@@ -44,9 +50,9 @@ public class MainApp extends Application {
             alert.setHeaderText("يبدو أن ملف قاعدة البيانات الرئيسي غير موجود");
             alert.setContentText("الرجاء التحقق من الملفات وشكرا");
             alert.showAndWait();
-            
+
         } else {
-            
+
             initMainForm();
             showLogInForm();
         }
@@ -66,7 +72,6 @@ public class MainApp extends Application {
             primaryStage.setHeight(primScreenBounds.getHeight());
             System.out.println("width" + primaryStage.getWidth() + "hieght" + primaryStage.getHeight());
             primaryStage.setMaximized(true);
-           
 
             // Give the controller access to the main app.
             MainFormController controller = loader.getController();
@@ -172,5 +177,21 @@ public class MainApp extends Application {
     public void hideLoginForm() {
         // loginStage.hide();
         // showAccountingFilesForm();
+    }
+
+    void showDailyForm() {
+        FXMLLoader loader = new FXMLLoader();
+        AnchorPane dailyPane = null;
+        loader.setLocation(MainApp.class.getResource("Daily Form.fxml"));
+        try {
+            dailyPane = (AnchorPane) loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        mainForm.getChildren().add(dailyPane);
+        Scene scene = new Scene(mainForm);
+            primaryStage.setScene(scene);
+            primaryStage.setMaximized(true);
+        
     }
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" nodeOrientation="RIGHT_TO_LEFT" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="front.view.DailyFormController">
+   <children>
+      <Label layoutX="8.0" layoutY="8.0" text="دفتر اليومية">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ChoiceBox layoutY="43.0" prefWidth="150.0" />
+      <Label layoutX="371.0" layoutY="17.0" text="تاريخ" />
+      <TextField layoutX="309.0" layoutY="43.0" />
+      <TextField layoutX="309.0" layoutY="82.0" />
+      <TextField layoutX="472.0" layoutY="43.0" />
+      <TextField layoutX="466.0" layoutY="82.0" />
+      <TableView layoutY="132.0" prefHeight="200.0" prefWidth="621.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

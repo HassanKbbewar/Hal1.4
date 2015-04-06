@@ -43,6 +43,12 @@ public class MainFormController implements Initializable {
     }
 
     @FXML
+    private void showDailyForm(ActionEvent event) {
+        mainApp.showDailyForm();
+
+    }
+
+    @FXML
     private void handleExit(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.initOwner(mainApp.primaryStage);
@@ -53,7 +59,7 @@ public class MainFormController implements Initializable {
             Connector.closeConnections();
             System.exit(0);
         } else {
-    // ... user chose CANCEL or closed the dialog
+            // ... user chose CANCEL or closed the dialog
         }
 
     }
