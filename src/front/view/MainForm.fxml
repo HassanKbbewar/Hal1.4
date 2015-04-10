@@ -94,8 +94,10 @@
                 </Menu>
             </menus>
         </MenuBar>
-            <Button mnemonicParsing="false" onAction="#handleExit" prefHeight="25.0" prefWidth="56.0" text="إغلاق" AnchorPane.rightAnchor="637.0" AnchorPane.topAnchor="10.0" />
         </children>
       </AnchorPane>
     </top>
+   <center>
+      <TabPane fx:id="mainTab" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>

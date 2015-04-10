@@ -28,8 +28,8 @@
          <children>
             <TableView fx:id="AccountingFilesTable" prefHeight="156.0" prefWidth="357.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="35.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn fx:id="currentAccountingSelectedFile" prefWidth="68.0" text="الدفتر الحالي" />
-                <TableColumn fx:id="accountingFileName" prefWidth="151.0" text="اسم الدفتر" />
+                <TableColumn fx:id="currentAccountingSelectedFile" prefWidth="72.0" text="الدفتر الحالي" />
+                <TableColumn fx:id="accountingFileName" prefWidth="147.0" text="اسم الدفتر" />
                   <TableColumn fx:id="accountingFilePassword" prefWidth="136.0" text="كلمة المرور" />
               </columns>
             </TableView>

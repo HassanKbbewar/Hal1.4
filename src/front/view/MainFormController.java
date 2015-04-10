@@ -14,24 +14,32 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TabPane;
 
 /**
  * FXML Controller class
  *
  * @author Hassa_000
  */
-public class MainFormController implements Initializable {
+public class MainFormController implements Initializable, ControlledScreen {
 
     private MainApp mainApp;
 
     /**
      * Initializes the controller class.
      */
+    @FXML
+    public TabPane mainTab;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("in MainFormController initialize method");
+        mainTab.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
+        //mainTab.getStyleClass().add(TabPane.STYLE_CLASS_FLOATING);
+
     }
 
+    @Override
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }

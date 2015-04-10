@@ -20,7 +20,7 @@ import javax.persistence.EntityManager;
  *
  * @author Hassan
  */
-public class LoginFormController implements Initializable {
+public class LoginFormController implements Initializable , ControlledScreen {
 
     EntityManager mainEm;
     @FXML
@@ -75,6 +75,7 @@ public class LoginFormController implements Initializable {
 
     }
 
+    @Override
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }

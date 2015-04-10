@@ -53,7 +53,7 @@ import javax.persistence.EntityManager;
  *
  * @author Hassan
  */
-public class AccountingFilesFormController implements Initializable {
+public class AccountingFilesFormController implements Initializable , ControlledScreen {
 
     @FXML
     private TableView<AccountingFiles> AccountingFilesTable;
@@ -100,6 +100,7 @@ public class AccountingFilesFormController implements Initializable {
 
     public Stage accNoteBook;
 
+    @Override
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
         System.out.println(AccountingFilesTable);
@@ -703,7 +704,8 @@ public class AccountingFilesFormController implements Initializable {
             showAccountingFilesDetails(currAccFile);
             addingItems();
 
-            mainApp.accountingFilesStage.hide();
+            mainApp.mainController.mainTab.getTabs().remove(mainApp.mainController.mainTab.getSelectionModel().getSelectedItem()); 
+            //mainApp.accountingFilesStage.hide();
 
         } else {
             alert.hide();
