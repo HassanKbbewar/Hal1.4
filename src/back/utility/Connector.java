@@ -29,7 +29,7 @@ public class Connector {
 
             Map<String, String> properties = new HashMap<String, String>();
 
-            properties.put("javax.persistence.jdbc.url", "jdbc:hsqldb:file:Main Hal;ifexists=true;shutdown=true");
+            properties.put("javax.persistence.jdbc.url", "jdbc:hsqldb:file:Main Hal;ifexists=true;shutdown=true;hsqldb.lock_file=false");
             properties.put("javax.persistence.jdbc.password", "Hassan");
             properties.put("javax.persistence.jdbc.driver", "org.hsqldb.jdbcDriver");
             properties.put("javax.persistence.jdbc.user", "Hassan");
@@ -39,6 +39,16 @@ public class Connector {
 
         }
         return mainEm;
+    }
+
+    public static Boolean checkCycleFiles(AccountingFilesDetails detail) {
+        if (new File(detail.getFilePath() + "\\" + detail.getFileName() + ".data").exists() == true
+                && new File(detail.getFilePath() + "\\" + detail.getFileName() + ".script").exists() == true
+                && new File(detail.getFilePath() + "\\" + detail.getFileName() + ".properties").exists() == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static synchronized EntityManager getDataEntityManager() {
@@ -57,13 +67,11 @@ public class Connector {
                         details = files.getAccountingFilesDetailsList();
                     }
                 }
-                if (details.isEmpty() == false) {
+                if (details != null && details.isEmpty() == false) {
                     for (AccountingFilesDetails detail : details) {
                         if (detail.getActiveStatus() == true) {
-                            properties.put("javax.persistence.jdbc.url", "jdbc:hsqldb:file:" + detail.getFilePath() + "\\" + detail.getFileName() + ";ifexists=true" + ";shutdown=true");
-                            if (new File(detail.getFilePath() + "\\" + detail.getFileName() + ".data").exists() == true
-                                    && new File(detail.getFilePath() + "\\" + detail.getFileName() + ".script").exists() == true
-                                    && new File(detail.getFilePath() + "\\" + detail.getFileName() + ".properties").exists() == true) {
+                            properties.put("javax.persistence.jdbc.url", "jdbc:hsqldb:file:" + detail.getFilePath() + "\\" + detail.getFileName() + ";ifexists=true" + ";shutdown=true" + ";hsqldb.lock_file=false");
+                            if (checkCycleFiles(detail) == true) {
                                 dataEmf = Persistence.createEntityManagerFactory("HalPU", properties);
                                 dataEm = dataEmf.createEntityManager();
                             } else {
@@ -80,7 +88,7 @@ public class Connector {
                 }
 
             }
-
+            
             System.out.println("in getDataEntityManager in getDataEntityManager in getDataEntityManager in getDataEntityManager ");
 
         }

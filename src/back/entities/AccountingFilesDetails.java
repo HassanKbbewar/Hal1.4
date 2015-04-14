@@ -1,10 +1,8 @@
 package back.entities;
 
+import front.utility.Formatter;
+import java.awt.font.NumericShaper;
 import java.io.Serializable;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Date;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
@@ -12,7 +10,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.util.converter.LocalDateTimeStringConverter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -181,36 +178,47 @@ public class AccountingFilesDetails implements Serializable {
         return new SimpleBooleanProperty(activeStatus);
     }
 
-    public ObjectProperty<LocalDate> accFilesDetailsStartDateProperty() {
-        Instant instant = null;
+    public ObjectProperty<Date> accFilesDetailsStartDateProperty() {
         if (cycleStartDate != null) {
-            instant = Instant.ofEpochMilli(cycleStartDate.getTime());
-            return new SimpleObjectProperty<LocalDate>(LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate());
+            return new SimpleObjectProperty<Date>(cycleStartDate);
+        } else {
+            return new SimpleObjectProperty<Date>(null);
         }
-        else
-            return new SimpleObjectProperty<LocalDate>(null);
     }
 
-    public ObjectProperty<LocalDate> accFilesDetailsEndDateProperty() {
-        Instant instant = null;
+    public ObjectProperty<Date> accFilesDetailsEndDateProperty() {
         if (cycleEndDate != null) {
-            instant = Instant.ofEpochMilli(cycleEndDate.getTime());
-            return new SimpleObjectProperty<LocalDate>(LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate());
+            return new SimpleObjectProperty<Date>(cycleEndDate);
+        } else {
+            return new SimpleObjectProperty<Date>(null);
         }
-        else
-            return new SimpleObjectProperty<LocalDate>(null);
     }
 
     public StringProperty accountingFilesDetailsFileNameProperty() {
-        return new SimpleStringProperty(fileName);
+
+        if (fileName != null) {
+            return new SimpleStringProperty(Formatter.formatString(fileName));
+        } else {
+            return new SimpleStringProperty("");
+        }
     }
 
     public StringProperty accountingFilesDetailsFileLocationProperty() {
-        return new SimpleStringProperty(filePath);
+
+        if (filePath != null) {
+            return new SimpleStringProperty(filePath);
+        } else {
+            return new SimpleStringProperty("");
+        }
     }
 
     public StringProperty accountingFilesDetailsFileBackupProperty() {
-        return new SimpleStringProperty(fileBackupName);
+        if (fileBackupName != null) {
+            return new SimpleStringProperty(Formatter.formatString(fileBackupName));
+        } else {
+            return new SimpleStringProperty("");
+        }
+
     }
 
     public BooleanProperty accClosedFileProperty() {

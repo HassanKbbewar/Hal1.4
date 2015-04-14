@@ -3,6 +3,7 @@ package front.view;
 import back.utility.Connector;
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -11,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Menu;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -28,7 +30,7 @@ public class MainApp extends Application {
     public Stage primaryStage;
     private BorderPane mainForm;
     public Stage accountingFilesStage;
-    MainFormController mainController;
+    public MainFormController mainController;
 
     public MainApp() {
     }
@@ -36,8 +38,16 @@ public class MainApp extends Application {
     @Override
     public void init() throws Exception {
         System.out.println("in init");
+        Locale arabicLocale = new Locale.Builder().setLanguageTag("ar-Arab-SY-u-nu-arab").build();
+        Locale.setDefault(arabicLocale);
+        Locale.setDefault(Locale.Category.DISPLAY, arabicLocale);
+        Locale.setDefault(Locale.Category.FORMAT, arabicLocale);
+        System.setProperty("user.language", "ar");
+        System.setProperty("user.country", "SY");
+        System.out.println("locale " + Locale.getDefault().getCountry() + " script   " + Locale.getDefault().getScript() + "  tag    " + Locale.getDefault().toLanguageTag());
+        System.out.println("getDisplayCountry " + Locale.getDefault().getDisplayCountry() + " getDisplayLanguage   " + Locale.getDefault().getDisplayLanguage() + "  tag    " + Locale.getDefault().toLanguageTag());
+
     }
-    // CREATE ROOT
 
     @Override
     public void start(Stage primaryStage) {
@@ -117,11 +127,22 @@ public class MainApp extends Application {
             Scene scene = new Scene(loginForm, 400, 500);
             loginStage.setScene(scene);
             loginStage.centerOnScreen();
+
+            loginStage.setOnCloseRequest((new EventHandler<WindowEvent>() {
+
+                @Override
+                public void handle(WindowEvent arg0) {
+                    System.out.println("OnCloseRequest OnCloseRequest OnCloseRequest OnCloseRequest");
+                    Connector.closeConnections();
+                    System.exit(0);
+
+                }
+            }));
+
             //loginStage.setX((primScreenBounds.getWidth() - 400) / 2);
             //loginStage.setY((primScreenBounds.getHeight() - 500) / 4);
             //System.out.println("x isssss"+(primScreenBounds.getWidth() - 400) / 2);
             // Set person overview into the center of root layout.
-
             // Give the controller access to the main app.
             LoginFormController controller = loader.getController();
             controller.setMainApp(this);
@@ -188,6 +209,19 @@ public class MainApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public void disableMenus() {
+        for (Menu m : mainController.mainMenuBar.getMenus()) {
+            m.setDisable(true);
+        }
+        mainController.mainMenuBar.getMenus().get(0).setDisable(false);
+    }
+
+    public void enableMenus() {
+        for (Menu m : mainController.mainMenuBar.getMenus()) {
+            m.setDisable(false);
+        }
     }
 
     public void hideLoginForm() {

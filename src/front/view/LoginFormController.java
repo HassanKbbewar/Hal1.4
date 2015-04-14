@@ -6,11 +6,15 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javax.persistence.EntityManager;
@@ -20,7 +24,7 @@ import javax.persistence.EntityManager;
  *
  * @author Hassan
  */
-public class LoginFormController implements Initializable , ControlledScreen {
+public class LoginFormController implements Initializable, ControlledScreen {
 
     EntityManager mainEm;
     @FXML
@@ -42,6 +46,8 @@ public class LoginFormController implements Initializable , ControlledScreen {
                 userName.requestFocus();
             }
         });
+        userName.setText("a");
+        password.setText("a");
     }
 
     @FXML
@@ -56,6 +62,16 @@ public class LoginFormController implements Initializable , ControlledScreen {
             if (userName.getText().equals(user.getUserName()) && password.getText().equals(user.getUserPassword()) && user.getUserStatus() == true) {
                 System.out.println("مبروووووووووووووووووووووووووك");
                 ((Node) (event.getSource())).getScene().getWindow().hide();
+                EntityManager dEM = Connector.getDataEntityManager();
+                if (dEM == null) {
+                    mainApp.disableMenus();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("لايوجد ملف محاسبي محدد");
+                    alert.setHeaderText("تحذير");
+                    alert.getDialogPane().nodeOrientationProperty().set(NodeOrientation.RIGHT_TO_LEFT);
+                    alert.setContentText("الرجاء التأكد من تحديد ملف محاسبي ");
+                    alert.show();
+                }
 
             } else {
                 errorMessage.setText("اسم المستخدم او كلمة المرور غير صحيح");
@@ -63,7 +79,6 @@ public class LoginFormController implements Initializable , ControlledScreen {
             }
 
         }
-        Connector.getDataEntityManager();
 
     }
 

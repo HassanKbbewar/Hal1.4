@@ -10,7 +10,7 @@
     <top>
         <AnchorPane prefHeight="36.0" prefWidth="1400.0" BorderPane.alignment="CENTER">
          <children>
-        <MenuBar prefHeight="200.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
+        <MenuBar fx:id="mainMenuBar" prefHeight="200.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
             <menus>
                 <Menu mnemonicParsing="false" text="ملف">
                     <items>

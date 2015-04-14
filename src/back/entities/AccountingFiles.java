@@ -1,5 +1,7 @@
 package back.entities;
 
+import front.utility.Formatter;
+import java.awt.font.NumericShaper;
 import java.io.Serializable;
 import java.util.List;
 import javafx.beans.property.BooleanProperty;
@@ -11,7 +13,6 @@ import javafx.beans.property.StringProperty;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -131,24 +132,13 @@ public class AccountingFiles implements Serializable {
         return "back.entities.AccountingFiles[ accountingFilesId=" + accountingFilesId + " ]";
     }
 
-    /**
-     * @return the accFileId
-     */
-    public IntegerProperty accFileIdProperty() {
-        if (accountingFilesId != null) {
-            return new SimpleIntegerProperty(accountingFilesId);
-        } else {
-            System.out.println("accFileIdProperty return null");
-            return new SimpleIntegerProperty(1);
-        }
-    }
 
     /**
      * @return the accFileName
      */
     public StringProperty accFileNameProperty() {
         if (accountingFilesName != null) {
-            return new SimpleStringProperty(accountingFilesName);
+            return new SimpleStringProperty(Formatter.formatString(accountingFilesName));
         } else {
             System.out.println("accFileNameProperty return null");
             return new SimpleStringProperty(null);

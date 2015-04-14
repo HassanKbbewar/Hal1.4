@@ -3,16 +3,22 @@ package front.view;
 import back.entities.AccountingFiles;
 import back.entities.AccountingFilesDetails;
 import back.utility.Connector;
+import front.utility.Formatter;
 import java.io.File;
 import java.io.IOException;
 
 import java.net.URL;
 import java.nio.file.Files;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -53,7 +59,7 @@ import javax.persistence.EntityManager;
  *
  * @author Hassan
  */
-public class AccountingFilesFormController implements Initializable , ControlledScreen {
+public class AccountingFilesFormController implements Initializable, ControlledScreen {
 
     @FXML
     private TableView<AccountingFiles> AccountingFilesTable;
@@ -65,10 +71,10 @@ public class AccountingFilesFormController implements Initializable , Controlled
     private TableColumn<AccountingFilesDetails, Boolean> accountingFilesDetailsSelectedFile;
 
     @FXML
-    private TableColumn<AccountingFilesDetails, LocalDate> accountingFilesDetailsStartDate;
+    private TableColumn<AccountingFilesDetails, Date> accountingFilesDetailsStartDate;
 
     @FXML
-    private TableColumn<AccountingFilesDetails, LocalDate> accountingFilesDetailsEndDate;
+    private TableColumn<AccountingFilesDetails, Date> accountingFilesDetailsEndDate;
 
     @FXML
     private TableColumn<AccountingFilesDetails, String> accountingFilesDetailsFileName;
@@ -124,42 +130,36 @@ public class AccountingFilesFormController implements Initializable , Controlled
         addingItems();
         accountingFilesDetailsSelectedFile.setCellValueFactory(new PropertyValueFactory<AccountingFilesDetails, Boolean>("currentAccSelectedFile"));
         accountingFilesDetailsSelectedFile.setCellFactory(CheckBoxTableCell.forTableColumn(accountingFilesDetailsSelectedFile));
-        accountingFilesDetailsStartDate.setCellValueFactory(new PropertyValueFactory<AccountingFilesDetails, LocalDate>("accFilesDetailsStartDate"));
-        DateTimeFormatter myDateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        accountingFilesDetailsStartDate.setCellValueFactory(new PropertyValueFactory<AccountingFilesDetails, Date>("accFilesDetailsStartDate"));
         accountingFilesDetailsStartDate.setCellFactory(column -> {
-            return new TableCell<AccountingFilesDetails, LocalDate>() {
+            return new TableCell<AccountingFilesDetails, Date>() {
                 @Override
-                protected void updateItem(LocalDate item, boolean empty) {
+                protected void updateItem(Date item, boolean empty) {
                     super.updateItem(item, empty);
 
                     if (item == null || empty) {
                         setText(null);
                         setStyle("");
                     } else {
-                        // Format date.
-                        setText(myDateFormatter.format(item));
-
-                        // Style all dates in March with a different color.
+                        setText(Formatter.formatDate(item));
                     }
                 }
             };
         });
 
-        accountingFilesDetailsEndDate.setCellValueFactory(new PropertyValueFactory<AccountingFilesDetails, LocalDate>("accFilesDetailsEndDate"));
+        accountingFilesDetailsEndDate.setCellValueFactory(new PropertyValueFactory<AccountingFilesDetails, Date>("accFilesDetailsEndDate"));
         accountingFilesDetailsEndDate.setCellFactory(column -> {
-            return new TableCell<AccountingFilesDetails, LocalDate>() {
+            return new TableCell<AccountingFilesDetails, Date>() {
                 @Override
-                protected void updateItem(LocalDate item, boolean empty) {
+                protected void updateItem(Date item, boolean empty) {
                     super.updateItem(item, empty);
 
                     if (item == null || empty) {
                         setText(null);
                         setStyle("");
                     } else {
-                        // Format date.
-                        setText(myDateFormatter.format(item));
+                        setText(Formatter.formatDate(item));
 
-                        // Style all dates in March with a different color.
                     }
                 }
             };
@@ -193,40 +193,6 @@ public class AccountingFilesFormController implements Initializable , Controlled
             }
         }
 
-    }
-
-    @FXML
-    private void handleSelect(AccountingFiles curraccfile) {
-        System.out.println("begin handleSelect");
-
-        //AccountingFilesTable.getSelectionModel().clearSelection();
-        System.out.println("after clearSelection");
-        //AccountingFilesTable.getSelectionModel().select(null);
-        System.out.println(curraccfile.getAccountingFilesName());
-
-        for (AccountingFiles af : accountingData) {
-
-            mainEm.getTransaction().begin();
-            af.setAccountingFilesActiveStatus(false);
-            mainEm.getTransaction().commit();
-            //accountingData.set(accountingData.indexOf(af), af);
-            System.out.println("in looooooooooooop");
-        }
-        System.out.println("after the loop finished");
-        mainEm.getTransaction().begin();
-        curraccfile.setAccountingFilesActiveStatus(true);
-        mainEm.getTransaction().commit();
-        System.out.println("after the lastcommit of  finished");
-        List<AccountingFiles> listOfAccountingFiles = mainEm.createNamedQuery("AccountingFiles.findAll").getResultList();
-        //AccountingFilesTable.getSelectionModel().clearSelection();
-
-        /*AccountingFilesTable.requestFocus();
-         AccountingFilesTable.getSelectionModel().select(-1);*/
-        accountingData.setAll(listOfAccountingFiles);
-        System.out.println("after setall method");
-        List<AccountingFilesDetails> listOfAccDetails = curraccfile.getAccountingFilesDetailsList();
-        accountingDetails.setAll(listOfAccDetails);
-        AccountingFilesDetailsTable.setItems(accountingDetails);
     }
 
     public void showNewAccountingNoteBookDialog() {
@@ -291,6 +257,10 @@ public class AccountingFilesFormController implements Initializable , Controlled
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
+                if (currAccFile.getAccountingFilesActiveStatus() == true) {
+                    Connector.closeDataConnection();
+                    mainApp.disableMenus();
+                }
                 Connector.getMainEntityManager().getTransaction().begin();
                 Connector.getMainEntityManager().remove(currAccFile);
                 Connector.getMainEntityManager().getTransaction().commit();
@@ -302,6 +272,10 @@ public class AccountingFilesFormController implements Initializable , Controlled
         } else {
             if (currAccFile != null && !currAccFile.getAccountingFilesPassword().equals("")) {
                 if (showAccountingBookPasswordConfirm(currAccFile) == true) {
+                    if (currAccFile.getAccountingFilesActiveStatus() == true) {
+                        Connector.closeDataConnection();
+                        mainApp.disableMenus();
+                    }
                     Connector.getMainEntityManager().getTransaction().begin();
                     Connector.getMainEntityManager().remove(currAccFile);
                     Connector.getMainEntityManager().getTransaction().commit();
@@ -607,6 +581,10 @@ public class AccountingFilesFormController implements Initializable , Controlled
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
+            if (currAccFileDetail.getActiveStatus() == true) {
+                Connector.closeDataConnection();
+                mainApp.disableMenus();
+            }
             System.out.println("in remove cycle " + currAccFileDetail.getFileName());
             currAccFile.getAccountingFilesDetailsList().remove(currAccFileDetail);
             Connector.getMainEntityManager().getTransaction().begin();
@@ -660,12 +638,19 @@ public class AccountingFilesFormController implements Initializable , Controlled
                 }
 
             }
-        }else if (currAccFile.getAccountingFilesActiveStatus() == true && currAccFileDetail.getActiveStatus() == true){
-            Alert alert = new Alert(AlertType.WARNING);
+        } else if (currAccFile.getAccountingFilesActiveStatus() == true && currAccFileDetail.getActiveStatus() == true) {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("هذه الدورة محددة بالفعل مسبقا");
             alert.getDialogPane().nodeOrientationProperty().set(NodeOrientation.RIGHT_TO_LEFT);
-            alert.setContentText("الرجاء تحديد دورة محاسبية غير محددة مسبقاً");
-            alert.showAndWait();
+            alert.setContentText("هل تريد الإنتقال لها مرة ثانية ؟");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                if (Connector.getDataEntityManager()!= null){
+                mainApp.mainController.mainTab.getTabs().remove(mainApp.mainController.mainTab.getSelectionModel().getSelectedItem());
+                mainApp.enableMenus();
+                }
+            }
+
         }
 
     }
@@ -680,42 +665,54 @@ public class AccountingFilesFormController implements Initializable , Controlled
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
+            if (Connector.checkCycleFiles(currAccFileDetail) == true) {
+                mainEm.getTransaction().begin();
+                for (AccountingFiles af : accountingData) {
+                    af.setAccountingFilesActiveStatus(false);
+                }
+                for (AccountingFilesDetails afDetail : accountingDetails) {
+                    afDetail.setActiveStatus(false);
+                }
+                currAccFile.setAccountingFilesActiveStatus(true);
+                currAccFileDetail.setActiveStatus(true);
 
-            mainEm.getTransaction().begin();
-            for (AccountingFiles af : accountingData) {
-                af.setAccountingFilesActiveStatus(false);
-            }
-            for (AccountingFilesDetails afDetail : accountingDetails) {
-                afDetail.setActiveStatus(false);
-            }
-            currAccFile.setAccountingFilesActiveStatus(true);
-            currAccFileDetail.setActiveStatus(true);
-            Connector.closeDataConnection();
-            EntityManager dataManager = Connector.getDataEntityManager();
-            if (dataManager != null && dataManager.isOpen() == true) {
-                mainEm.getTransaction().commit();
+                Connector.closeDataConnection();
+
+                EntityManager dataManager = Connector.getDataEntityManager();
+                if (dataManager != null && dataManager.isOpen() == true) {
+                    mainEm.getTransaction().commit();
+                    mainApp.enableMenus();
+                } else {
+                    System.out.println("if(dataManager != null && dataManager.isOpen() == false)if(dataManager != null && dataManager.isOpen() == false)");
+                    mainEm.getTransaction().rollback();
+                    Connector.getDataEntityManager();
+
+                }
+
+                showAccountingFilesDetails(currAccFile);
+                addingItems();
+
+                mainApp.mainController.mainTab.getTabs().remove(mainApp.mainController.mainTab.getSelectionModel().getSelectedItem());
+                //mainApp.accountingFilesStage.hide();
             } else {
-                System.out.println("if(dataManager != null && dataManager.isOpen() == false)if(dataManager != null && dataManager.isOpen() == false)");
-                mainEm.getTransaction().rollback();
-                Connector.getDataEntityManager();
-
+                Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                alert2.setTitle("خطأ في ملف الدورة المحددة");
+                alert2.setHeaderText("تحذير");
+                alert2.getDialogPane().nodeOrientationProperty().set(NodeOrientation.RIGHT_TO_LEFT);
+                alert2.setContentText("الرجاء التأكد من وجود ملفات الدورة المحددة");
+                alert2.show();
             }
-
-            showAccountingFilesDetails(currAccFile);
-            addingItems();
-
-            mainApp.mainController.mainTab.getTabs().remove(mainApp.mainController.mainTab.getSelectionModel().getSelectedItem()); 
-            //mainApp.accountingFilesStage.hide();
 
         } else {
             alert.hide();
         }
 
     }
+
     @FXML
-    private void removePassword (){
-        if (! AccountingFilesTable.getSelectionModel().getSelectedItem().getAccountingFilesPassword().equals("")){
-            if (showAccountingBookPasswordConfirm(AccountingFilesTable.getSelectionModel().getSelectedItem()) == true ){
+    private void removePassword() {
+        if (AccountingFilesTable.getSelectionModel().getSelectedItem()!= null && !AccountingFilesTable.getSelectionModel().getSelectedItem().getAccountingFilesPassword().equals("")) {
+            if (showAccountingBookPasswordConfirm(AccountingFilesTable.getSelectionModel().getSelectedItem()) == true) {
                 mainEm.getTransaction().begin();
                 AccountingFilesTable.getSelectionModel().getSelectedItem().setAccountingFilesPassword("");
                 mainEm.getTransaction().commit();

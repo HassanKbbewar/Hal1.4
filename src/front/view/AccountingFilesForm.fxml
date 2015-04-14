@@ -8,68 +8,68 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="front.view.AccountingFilesFormController">
-   <top>
-      <HBox alignment="TOP_CENTER" BorderPane.alignment="TOP_CENTER">
-         <children>
-            <AnchorPane prefHeight="66.0" prefWidth="800.0" BorderPane.alignment="TOP_CENTER">
-               <children>
-                  <Label layoutX="259.0" layoutY="8.0" text="شاشة خدمة الملفات" textAlignment="CENTER" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="259.0" AnchorPane.rightAnchor="258.0" AnchorPane.topAnchor="8.0">
-                     <font>
-                        <Font size="34.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-         </children>
-      </HBox>
-   </top>
-   <left>
-      <AnchorPane prefHeight="228.0" prefWidth="720.0">
-         <children>
-            <TableView fx:id="AccountingFilesTable" prefHeight="156.0" prefWidth="357.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="35.0" BorderPane.alignment="CENTER">
-              <columns>
-                <TableColumn fx:id="currentAccountingSelectedFile" prefWidth="72.0" text="الدفتر الحالي" />
-                <TableColumn fx:id="accountingFileName" prefWidth="147.0" text="اسم الدفتر" />
-                  <TableColumn fx:id="accountingFilePassword" prefWidth="136.0" text="كلمة المرور" />
-              </columns>
-            </TableView>
-            <Label contentDisplay="CENTER" layoutX="56.0" layoutY="1.0" text="الدفاتر المحاسبية الموجودة" AnchorPane.leftAnchor="20.0">
-               <font>
-                  <Font name="System Bold" size="21.0" />
-               </font>
-            </Label>
-            <Button layoutX="21.0" layoutY="189.0" mnemonicParsing="false" onAction="#addAcoountingNoteBook" text="إضافة دفتر" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="200.0" />
-            <Button layoutX="168.0" layoutY="200.0" mnemonicParsing="false" onAction="#changeAcoountingNoteBookPassword" text="تغيير كلمة المرور" AnchorPane.topAnchor="200.0" />
-            <Button layoutX="274.0" layoutY="200.0" mnemonicParsing="false" onAction="#removePassword" text="إزالة كلمة المرور" AnchorPane.topAnchor="200.0" />
-            <Button layoutX="98.0" layoutY="200.0" mnemonicParsing="false" onAction="#removeAcoountingNoteBook" text="إلغاء دفتر" AnchorPane.topAnchor="200.0" />
-            <Button layoutX="467.0" layoutY="101.0" mnemonicParsing="false" onAction="#closeCurrentCycle" prefHeight="30.0" prefWidth="157.0" text="إغلاق الدورة الحالية" AnchorPane.leftAnchor="496.0" AnchorPane.rightAnchor="67.0" />
-            <Button layoutX="496.0" layoutY="58.0" mnemonicParsing="false" onAction="#proccedToSelectedCycle" prefHeight="30.0" prefWidth="158.0" text="الإنتقال إلى الدورة الجديدة" AnchorPane.leftAnchor="496.0" AnchorPane.rightAnchor="66.0" AnchorPane.topAnchor="58.0" />
-         </children>
-      </AnchorPane>
-   </left>
-   <bottom>
-      <AnchorPane prefHeight="306.0" prefWidth="800.0" BorderPane.alignment="TOP_RIGHT">
-         <children>
-            <TableView fx:id="AccountingFilesDetailsTable" prefHeight="173.0" prefWidth="606.0" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="35.0">
-              <columns>
-                <TableColumn fx:id="accountingFilesDetailsSelectedFile" prefWidth="75.0" text="الدورة الحالية" />
-                <TableColumn fx:id="accountingFilesDetailsStartDate" prefWidth="75.0" text="بداية الدورة" />
-                  <TableColumn fx:id="accountingFilesDetailsEndDate" prefWidth="75.0" text="نهاية الدورة" />
-                  <TableColumn fx:id="accountingFilesDetailsFileName" prefWidth="101.0" text="اسم الملف" />
-                  <TableColumn fx:id="accountingFilesDetailsLocation" prefWidth="110.0" text="الموقع" />
-                  <TableColumn fx:id="accountingFilesDetailsBackupLocation" prefWidth="110.0" text="اسم الملف الاحتياطي" />
-                  <TableColumn fx:id="accountingFilesDetailsClosed" prefWidth="58.0" text="مغلقة" />
-              </columns>
-            </TableView>
-            <Label contentDisplay="CENTER" text="الدورات المتاحة" AnchorPane.leftAnchor="20.0">
-               <font>
-                  <Font name="System Bold" size="21.0" />
-               </font>
-            </Label>
-            <Button layoutX="354.0" layoutY="6.0" mnemonicParsing="false" onAction="#addOpeningCycle" text="إضافة دورة إفتتاحية" AnchorPane.topAnchor="6.0" />
-            <Button layoutX="474.0" layoutY="6.0" mnemonicParsing="false" onAction="#linkWithCycle" text="ربط مع دورة" AnchorPane.topAnchor="6.0" />
-            <Button layoutX="561.0" layoutY="6.0" mnemonicParsing="false" onAction="#removeCycle" text="إلغاء دورة" AnchorPane.topAnchor="6.0" />
-         </children>
-      </AnchorPane>
-   </bottom>
+    <top>
+        <HBox alignment="TOP_CENTER" BorderPane.alignment="TOP_CENTER">
+            <children>
+                <AnchorPane prefHeight="66.0" prefWidth="800.0" BorderPane.alignment="TOP_CENTER">
+                    <children>
+                        <Label layoutX="259.0" layoutY="8.0" text="شاشة خدمة الملفات" textAlignment="CENTER" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="259.0" AnchorPane.rightAnchor="258.0" AnchorPane.topAnchor="8.0">
+                            <font>
+                                <Font size="34.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </children>
+        </HBox>
+    </top>
+    <left>
+        <AnchorPane prefHeight="228.0" prefWidth="720.0">
+            <children>
+                <TableView fx:id="AccountingFilesTable" prefHeight="156.0" prefWidth="357.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="35.0" BorderPane.alignment="CENTER">
+                    <columns>
+                        <TableColumn fx:id="currentAccountingSelectedFile" prefWidth="72.0" text="الدفتر الحالي" />
+                        <TableColumn fx:id="accountingFileName" prefWidth="147.0" text="اسم الدفتر" />
+                        <TableColumn fx:id="accountingFilePassword" prefWidth="136.0" text="كلمة المرور" />
+                    </columns>
+                </TableView>
+                <Label contentDisplay="CENTER" layoutX="56.0" layoutY="1.0" text="الدفاتر المحاسبية الموجودة" AnchorPane.leftAnchor="20.0">
+                    <font>
+                        <Font name="System Bold" size="21.0" />
+                    </font>
+                </Label>
+                <Button layoutX="21.0" layoutY="189.0" mnemonicParsing="false" onAction="#addAcoountingNoteBook" text="إضافة دفتر" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="200.0" />
+                <Button layoutX="98.0" layoutY="200.0" mnemonicParsing="false" onAction="#removeAcoountingNoteBook" text="إلغاء دفتر" AnchorPane.topAnchor="200.0" />
+                <Button layoutX="168.0" layoutY="200.0" mnemonicParsing="false" onAction="#changeAcoountingNoteBookPassword" text="تغيير كلمة المرور" AnchorPane.topAnchor="200.0" />
+                <Button layoutX="274.0" layoutY="200.0" mnemonicParsing="false" onAction="#removePassword" text="إزالة كلمة المرور" AnchorPane.topAnchor="200.0" />
+                <Button layoutX="496.0" layoutY="58.0" mnemonicParsing="false" onAction="#proccedToSelectedCycle" prefHeight="30.0" prefWidth="158.0" text="الإنتقال إلى الدورة الجديدة" AnchorPane.leftAnchor="496.0" AnchorPane.rightAnchor="66.0" AnchorPane.topAnchor="58.0" />
+                <Button layoutX="467.0" layoutY="101.0" mnemonicParsing="false" onAction="#closeCurrentCycle" prefHeight="30.0" prefWidth="157.0" text="إغلاق الدورة الحالية" AnchorPane.leftAnchor="496.0" AnchorPane.rightAnchor="67.0" />        
+            </children>
+        </AnchorPane>
+    </left>
+    <bottom>
+        <AnchorPane prefHeight="306.0" prefWidth="800.0" BorderPane.alignment="TOP_RIGHT">
+            <children>
+                <TableView fx:id="AccountingFilesDetailsTable" prefHeight="173.0" prefWidth="606.0" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="35.0">
+                    <columns>
+                        <TableColumn fx:id="accountingFilesDetailsSelectedFile" prefWidth="75.0" text="الدورة الحالية" />
+                        <TableColumn fx:id="accountingFilesDetailsStartDate" prefWidth="75.0" text="بداية الدورة" />
+                        <TableColumn fx:id="accountingFilesDetailsEndDate" prefWidth="75.0" text="نهاية الدورة" />
+                        <TableColumn fx:id="accountingFilesDetailsFileName" prefWidth="101.0" text="اسم الملف" />
+                        <TableColumn fx:id="accountingFilesDetailsLocation" prefWidth="110.0" text="الموقع" />
+                        <TableColumn fx:id="accountingFilesDetailsBackupLocation" prefWidth="110.0" text="اسم الملف الاحتياطي" />
+                        <TableColumn fx:id="accountingFilesDetailsClosed" prefWidth="58.0" text="مغلقة" />
+                    </columns>
+                </TableView>
+                <Label contentDisplay="CENTER" text="الدورات المتاحة" AnchorPane.leftAnchor="20.0">
+                    <font>
+                        <Font name="System Bold" size="21.0" />
+                    </font>
+                </Label>
+                <Button layoutX="354.0" layoutY="6.0" mnemonicParsing="false" onAction="#addOpeningCycle" text="إضافة دورة إفتتاحية" AnchorPane.topAnchor="6.0" />
+                <Button layoutX="474.0" layoutY="6.0" mnemonicParsing="false" onAction="#linkWithCycle" text="ربط مع دورة" AnchorPane.topAnchor="6.0" />
+                <Button layoutX="561.0" layoutY="6.0" mnemonicParsing="false" onAction="#removeCycle" text="إلغاء دورة" AnchorPane.topAnchor="6.0" />
+            </children>
+        </AnchorPane>
+    </bottom>
 </BorderPane>

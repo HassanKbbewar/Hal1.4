@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane dividerPositions="0.2" orientation="VERTICAL" prefHeight="768.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane maxHeight="115.0" minHeight="115.0" minWidth="0.0" prefHeight="100.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <Label layoutX="628.0" layoutY="14.0" text="دفتر اليومية" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="419.0" layoutY="14.0" text="تاريخ" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="5.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="418.0" layoutY="46.0" text="مسلسل" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="46.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="598.0" layoutY="5.0" text="رقم الفاتورة" AnchorPane.leftAnchor="580.0" AnchorPane.topAnchor="5.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <DatePicker layoutX="461.0" layoutY="16.0" prefHeight="25.0" prefWidth="128.0" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="10.0" />
+                  <TextField alignment="TOP_LEFT" editable="false" layoutX="497.0" layoutY="49.0" prefHeight="25.0" prefWidth="128.0" text="430" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="49.0" />
+                  <Separator layoutX="569.0" layoutY="5.0" orientation="VERTICAL" prefHeight="71.0" prefWidth="6.0" />
+                  <TextField alignment="TOP_LEFT" editable="false" layoutX="696.0" layoutY="10.0" prefHeight="25.0" prefWidth="128.0" AnchorPane.leftAnchor="696.0" AnchorPane.topAnchor="10.0" />
+                  <TextField alignment="TOP_LEFT" editable="false" layoutX="768.0" layoutY="64.0" prefHeight="25.0" prefWidth="128.0" AnchorPane.leftAnchor="696.0" AnchorPane.topAnchor="49.0" />
+                  <Label layoutX="594.0" layoutY="47.0" text="نوع الفاتورة" AnchorPane.leftAnchor="580.0" AnchorPane.topAnchor="46.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="5.0" layoutY="75.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
+                  <Label layoutX="360.0" layoutY="15.0" text="بحث عن سند رقم :" textFill="#f50000" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="85.0">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox layoutX="185.0" layoutY="86.0" prefHeight="25.0" prefWidth="78.0" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="86.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <TableView prefHeight="645.0" prefWidth="1022.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="10.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="مدين" />
+                      <TableColumn prefWidth="75.0" text="دائن" />
+                        <TableColumn prefWidth="75.0" text="إسم الحساب" />
+                        <TableColumn prefWidth="75.0" text="الشرح" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
